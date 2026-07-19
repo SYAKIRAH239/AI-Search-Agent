@@ -38,7 +38,7 @@ def invoke_with_retry(target_llm, messages, max_retries=3, base_delay=5):
             print(f"Rate limited, waiting {wait}s before retry ({attempt + 1}/{max_retries})...")
             time.sleep(wait)
 
-
+#create state
 class State(TypedDict):
     messages: Annotated[list, add_messages]
     user_question: str | None
@@ -342,6 +342,7 @@ def synthesize_analyses(state: State):
 
 graph_builder = StateGraph(State)
 
+#define node/edges
 graph_builder.add_node("route_question", route_question)
 graph_builder.add_node("answer_from_context", answer_from_context)
 graph_builder.add_node("google_search", google_search)
